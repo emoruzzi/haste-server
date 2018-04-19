@@ -124,6 +124,10 @@ app.use(route(function(router) {
     var skipExpire = !!config.documents[key];
     return documentHandler.handleGet(key, response, skipExpire);
   });
+  // remove all data (only works for redis, for now)
+  router.get('/reset', function(request, response, next) {
+    return documentHandler.handleReset(request, response);
+  });
 }));
 
 // Otherwise, try to match static files
